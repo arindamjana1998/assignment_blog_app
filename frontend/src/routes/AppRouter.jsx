@@ -1,29 +1,28 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import PublicLayout from '../layouts/PublicLayout';
-import AuthLayout from '../layouts/AuthLayout';
-import AdminLayout from '../layouts/AdminLayout';
-import ProtectedRoute from './ProtectedRoute';
-import AdminRoute from './AdminRoute';
-import { useAuth } from '../hooks/useAuth';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import PublicLayout from "../layouts/PublicLayout";
+import AuthLayout from "../layouts/AuthLayout";
+import AdminLayout from "../layouts/AdminLayout";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminRoute from "./AdminRoute";
+import { useAuth } from "../hooks/useAuth";
 
-// Phase 3 & 4 Pages
-import HomePage from '../pages/HomePage';
-import PostDetailsPage from '../pages/PostDetailsPage';
-import CreatePostPage from '../pages/CreatePostPage';
-import EditPostPage from '../pages/EditPostPage';
-import MyPostsPage from '../pages/MyPostsPage';
-import ProfilePage from '../pages/ProfilePage';
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
-import OAuthCallbackPage from '../pages/OAuthCallbackPage';
-import NotFoundPage from '../pages/NotFoundPage';
+import HomePage from "../pages/HomePage";
+import PostDetailsPage from "../pages/PostDetailsPage";
+import CreatePostPage from "../pages/CreatePostPage";
+import EditPostPage from "../pages/EditPostPage";
+import MyPostsPage from "../pages/MyPostsPage";
+import ProfilePage from "../pages/ProfilePage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
+import OAuthCallbackPage from "../pages/OAuthCallbackPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
-import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
-import AdminUsersPage from '../pages/admin/AdminUsersPage';
-import AdminPostsPage from '../pages/admin/AdminPostsPage';
-import AdminCommentsPage from '../pages/admin/AdminCommentsPage';
-import AdminActivityLogsPage from '../pages/admin/AdminActivityLogsPage';
+import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
+import AdminUsersPage from "../pages/admin/AdminUsersPage";
+import AdminPostsPage from "../pages/admin/AdminPostsPage";
+import AdminCommentsPage from "../pages/admin/AdminCommentsPage";
+import AdminActivityLogsPage from "../pages/admin/AdminActivityLogsPage";
 
 // Redirect authenticated users away from Login/Register
 const GuestRoute = ({ children }) => {
@@ -72,7 +71,10 @@ export const AppRouter = () => {
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/posts" element={<AdminPostsPage />} />
           <Route path="/admin/comments" element={<AdminCommentsPage />} />
-          <Route path="/admin/activity-logs" element={<AdminActivityLogsPage />} />
+          <Route
+            path="/admin/activity-logs"
+            element={<AdminActivityLogsPage />}
+          />
         </Route>
       </Route>
 

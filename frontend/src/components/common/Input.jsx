@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export const Input = forwardRef(
   (
@@ -8,6 +9,7 @@ export const Input = forwardRef(
       type = 'text',
       placeholder,
       error,
+      success,
       helperText,
       leftIcon: LeftIcon,
       rightIcon: RightIcon,
@@ -56,6 +58,8 @@ export const Input = forwardRef(
               ${
                 error
                   ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-200'
+                  : success
+                  ? 'border-emerald-400 focus:border-emerald-500 focus:ring-emerald-200'
                   : 'border-slate-300 focus:border-brand-500 focus:ring-brand-200'
               }
             `}
@@ -81,12 +85,20 @@ export const Input = forwardRef(
         </div>
 
         {error && (
-          <p className="mt-1.5 text-xs text-rose-600 flex items-center gap-1">
+          <p className="mt-1.5 text-xs text-rose-600 flex items-center gap-1.5 font-medium">
+            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
             <span>{error}</span>
           </p>
         )}
 
-        {helperText && !error && (
+        {success && !error && (
+          <p className="mt-1.5 text-xs text-emerald-600 flex items-center gap-1.5 font-medium">
+            <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+            <span>{typeof success === 'string' ? success : ''}</span>
+          </p>
+        )}
+
+        {helperText && !error && !success && (
           <p className="mt-1.5 text-xs text-slate-500">{helperText}</p>
         )}
       </div>

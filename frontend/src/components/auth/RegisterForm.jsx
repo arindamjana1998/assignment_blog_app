@@ -13,6 +13,7 @@ import { getErrorMessage } from '../../utils/errorHandler';
 
 export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [serverError, setServerError] = useState(null);
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export const RegisterForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(registerSchema),
@@ -30,6 +32,20 @@ export const RegisterForm = () => {
       confirmPassword: '',
     },
   });
+
+  const password = watch('password') || '';
+  const confirmPassword = watch('confirmPassword') || '';
+
+  // Real-time password match evaluation as user types
+  const hasTypedConfirm = confirmPassword.length > 0;
+  const isMatch = hasTypedConfirm && password.length > 0 && password === confirmPassword;
+  const isMismatch = hasTypedConfirm && password !== confirmPassword;
+
+  const confirmPasswordError = isMismatch
+    ? 'Passwords do not match'
+    : errors.confirmPassword?.message;
+
+  const confirmPasswordSuccess = isMatch ? 'Passwords match' : null;
 
   const onSubmit = async (data) => {
     try {
@@ -100,11 +116,14 @@ export const RegisterForm = () => {
         <Input
           label="Confirm Password"
           name="confirmPassword"
-          type={showPassword ? 'text' : 'password'}
+          type={showConfirmPassword ? 'text' : 'password'}
           placeholder="Repeat your password"
           required
           leftIcon={Lock}
-          error={errors.confirmPassword?.message}
+          rightIcon={showConfirmPassword ? EyeOff : Eye}
+          onRightIconClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          error={confirmPasswordError}
+          success={confirmPasswordSuccess}
           {...register('confirmPassword')}
         />
 
