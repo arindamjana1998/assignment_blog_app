@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { PenSquare, Edit3, Trash2, BookOpen } from 'lucide-react';
 import postService from '../services/postService';
@@ -13,6 +13,7 @@ import { getErrorMessage } from '../utils/errorHandler';
 
 export const MyPostsPage = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [posts, setPosts] = useState([]);
@@ -134,7 +135,7 @@ export const MyPostsPage = () => {
             : 'Ready to share your voice? Create your first blog post now.'
         }
         emptyActionLabel="Write an Article"
-        onEmptyAction={() => {}}
+        onEmptyAction={() => navigate('/posts/create')}
         renderActions={(post) => (
           <div className="flex items-center gap-1">
             <Link to={`/posts/${post._id}/edit`}>
